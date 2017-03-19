@@ -1,0 +1,13 @@
+# OS or Editor folders
+.DS_Store
+*.sublime-workspace
+npm-debug.log
+# Project folders to ignore
+node_modules
+.tern-port
+.nyc_output
+*.map
+lib
+coverage
+es
+/material
