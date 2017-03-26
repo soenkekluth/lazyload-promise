@@ -16,9 +16,14 @@ $ yarn add lazyload-promise
 
 import lazyload from 'lazyload-promise';
 
-const container = document.querySelector('#container');
+const nodeContainingImages = document.querySelector('#nodeContainingImages');
 
-lazyload(container)
+lazyload(nodeContainingImages)
+  .then(......)
+
+// optional get load event of each image:
+
+lazyload(nodeContainingImages, {onLoad:(e)=>{....}})
   .then(......)
 
 ```
