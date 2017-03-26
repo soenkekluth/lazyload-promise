@@ -1,6 +1,6 @@
 {
   "name": "lazyload-promise",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "lazy loading images src and or srcset width promise magic Edit",
   "main": "lib/lazyload.js",
   "module": "es/lazyload.js",
