@@ -1,6 +1,6 @@
 {
   "name": "lazyload-promise",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "lazy loading images src and or srcset width promise magic Edit",
   "main": "lib/lazyload.js",
   "module": "es/lazyload.js",
@@ -9,8 +9,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "cross-env NODE_ENV=production run dist && run build:lib && run build:es",
     "build-debug": "cross-env NODE_ENV=production webpack -d",
-    "dist": "cross-env BABEL_ENV=dist webpack -p && cp dist/*.js example/",
-    "start": "run-p watch-js devserver",
+    "dist": "cross-env BABEL_ENV=dist webpack -p && cp dist/* example/",
+    "start": "cross-env NODE_ENV=development webpack-dev-server --inline --progress",
+    "example": "serve example -s -c 1",
     "build:lib": "cross-env BABEL_ENV=lib babel src -d lib",
     "build:es": "cross-env BABEL_ENV=es babel src -d es"
   },
@@ -53,8 +54,10 @@
     "cross-env": "^3.2.4",
     "mocha": "^3.2.0",
     "run-proxy": "^1.0.1",
+    "serve": "5.1.4",
     "should": "^11.2.1",
-    "webpack": "^1.14.0"
+    "webpack": "^1.14.0",
+    "webpack-dev-server": "2.4.2"
   },
   "dependencies": {
     "babel-runtime": ">=6.20.0"

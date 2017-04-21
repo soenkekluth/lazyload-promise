@@ -1,4 +1,6 @@
-const loadImage = (img, { onLoad, onProgress, onStart, onError } = {}) => new Promise((resolve, reject) => {
+const source = src => src;
+
+const loadImage = (img, { onLoad, onProgress, onStart, onError, setSource = source } = {}) => new Promise((resolve, reject) => {
   const src = img.getAttribute('data-src');
   const srcset = img.getAttribute('data-srcset');
 
@@ -7,6 +9,9 @@ const loadImage = (img, { onLoad, onProgress, onStart, onError } = {}) => new Pr
   }
 
   const onLoaded = (e) => {
+    e.target.removeEventListener('load', onLoaded);
+    e.target.removeEventListener('error', onLoaded);
+
     setTimeout(() => {
       if (onLoad) {
         onLoad(img);
@@ -19,16 +24,16 @@ const loadImage = (img, { onLoad, onProgress, onStart, onError } = {}) => new Pr
   img.addEventListener('error', onLoaded);
 
   if (src && img.getAttribute('src') !== src) {
-    img.src = src;
+    img.src = setSource(src);
     img.removeAttribute('data-src');
   }
   if (srcset && img.getAttribute('srcset') !== srcset) {
-    img.srcset = srcset;
+    img.srcset = setSource(srcset);
     img.removeAttribute('data-srcset');
   }
 });
 
-const lazyLoad = (el, { resize = false, selector = '[data-src], [data-srcset]', onLoad = null } = {}) => {
+const lazyLoad = (el, { resize = false, selector = '[data-src], [data-srcset]', onLoad, onProgress, onStart, onError, setSource } = {}) => {
   if (!el) {
     return Promise.reject(el);
   }
@@ -40,7 +45,7 @@ const lazyLoad = (el, { resize = false, selector = '[data-src], [data-srcset]', 
 
   const height = resize ? el.clientHeight : 0;
 
-  return Promise.all(images.map(img => loadImage(img, { onLoad })))
+  return Promise.all(images.map(img => loadImage(img, { onLoad, onProgress, onStart, onError, setSource })))
     .then(() => {
       if (height && typeof window !== 'undefined') {
         window.dispatchEvent(new Event('resize'));
