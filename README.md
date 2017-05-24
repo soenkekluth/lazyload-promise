@@ -1,6 +1,9 @@
 # lazyload-promise
 > lazy loading images src and or srcset width promise magic
 
+## Example
+https://rawgit.com/soenkekluth/lazyload-promise/master/example/index.html
+
 ## Install
 
 ```
