@@ -1,4 +1,6 @@
 # lazyload-promise
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/soenkekluth/lazyload-promise.svg)](https://greenkeeper.io/)
 > lazy loading images src and or srcset width promise magic
 
 ## Example
